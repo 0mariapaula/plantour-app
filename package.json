@@ -1,0 +1,26 @@
+{
+  "name": "plantour",
+  "version": "1.0.0",
+  "description": "Aplicativo para planejamento de viagens e roteiros turísticos",
+  "main": "index.js",
+  "scripts": {
+    "start": "cd backend && npm start",
+    "dev": "cd backend && npm run dev",
+    "test": "cd backend && npm test",
+    "flutter:run": "cd frontend && flutter run",
+    "flutter:build": "cd frontend && flutter build"
+  },
+  "keywords": [
+    "turismo",
+    "viagem",
+    "roteiro",
+    "flutter",
+    "nodejs"
+  ],
+  "author": "PlanTour Team",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/0mariapaula/plantour-app.git"
+  }
+}

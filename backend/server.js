@@ -1,24 +1,28 @@
-const express = require('express');
+const app = require('./app');
 const mongoose = require('mongoose');
-const cors = require('cors');
 require('dotenv').config();
 
-const app = express();
-
-// Middlewares
-app.use(cors());
-app.use(express.json()); // Permite que o app use JSON
-
 // Conexão com o MongoDB
-mongoose.connect(process.env.MONGO_URI)
-  .then(() => console.log('MongoDB conectado com sucesso!'))
-  .catch(err => console.log('Erro ao conectar com o MongoDB', err));
-
-// Rota de teste
-app.get('/', (req, res) => {
-  res.send('Servidor do Plantour rodando!');
-});
+const conectarBanco = async () => {
+  try {
+    await mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/plantour');
+    console.log('✅ MongoDB conectado com sucesso!');
+  } catch (error) {
+    console.error('❌ Erro ao conectar com o MongoDB:', error);
+    process.exit(1);
+  }
+};
 
 // Inicia o servidor
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`Servidor rodando na porta ${PORT}`));
+const PORT = process.env.PORT || 3000;
+
+const iniciarServidor = async () => {
+  await conectarBanco();
+  
+  app.listen(PORT, () => {
+    console.log(`🚀 Servidor PlanTour rodando na porta ${PORT}`);
+    console.log(`📱 Acesse: http://localhost:${PORT}`);
+  });
+};
+
+iniciarServidor();
